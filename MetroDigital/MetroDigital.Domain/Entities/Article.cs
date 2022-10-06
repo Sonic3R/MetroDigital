@@ -1,8 +1,8 @@
 ﻿namespace MetroDigital.Domain.Entities
 {
-    public class Article
+    public sealed class Article
     {
-        public int Id { get; set; }
+        public int ArticleId { get; set; }
         public string Name { get; set; } = null!;
         public double Price { get; set; }
 

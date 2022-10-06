@@ -1,8 +1,8 @@
 ﻿namespace MetroDigital.Domain.Entities
 {
-    public class User
+    public sealed class User
     {
-        public int Id { get; set; }
+        public int UserId { get; set; }
         public string Name { get; set; } = null!;
 
         public List<Basket> Baskets { get; set; } = null!;
