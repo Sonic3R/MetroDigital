@@ -5,6 +5,12 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroDigital.API", "MetroDigital.API\MetroDigital.API.csproj", "{531DC643-B925-446A-8B84-B60EA58B828A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroDigital.Application", "MetroDigital.Application\MetroDigital.Application.csproj", "{EE954DAC-3C6F-4F62-886D-FF0B942AC65D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroDigital.Domain", "MetroDigital.Domain\MetroDigital.Domain.csproj", "{36248734-10C4-48E6-ABB8-1B87A978FCBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroDigital.Infrastructure", "MetroDigital.Infrastructure\MetroDigital.Infrastructure.csproj", "{DD4DD268-DC98-4494-8BC2-5A22B7DEE71B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{531DC643-B925-446A-8B84-B60EA58B828A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{531DC643-B925-446A-8B84-B60EA58B828A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{531DC643-B925-446A-8B84-B60EA58B828A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE954DAC-3C6F-4F62-886D-FF0B942AC65D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE954DAC-3C6F-4F62-886D-FF0B942AC65D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE954DAC-3C6F-4F62-886D-FF0B942AC65D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE954DAC-3C6F-4F62-886D-FF0B942AC65D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36248734-10C4-48E6-ABB8-1B87A978FCBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36248734-10C4-48E6-ABB8-1B87A978FCBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36248734-10C4-48E6-ABB8-1B87A978FCBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36248734-10C4-48E6-ABB8-1B87A978FCBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD4DD268-DC98-4494-8BC2-5A22B7DEE71B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD4DD268-DC98-4494-8BC2-5A22B7DEE71B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD4DD268-DC98-4494-8BC2-5A22B7DEE71B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD4DD268-DC98-4494-8BC2-5A22B7DEE71B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
