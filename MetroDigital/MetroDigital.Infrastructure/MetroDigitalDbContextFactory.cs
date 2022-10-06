@@ -15,15 +15,15 @@ namespace MetroDigital.Infrastructure
 
         public IMetroDigitalDbContext Create()
         {
-            return GetDbContext();
+            return GetDbContext(_configuration);
         }
 
-        private MetroDigitalDbContext GetDbContext(Action<DbContextOptionsBuilder<MetroDigitalDbContext>>? configure = null)
+        internal static MetroDigitalDbContext GetDbContext(IConfiguration configuration, Action<DbContextOptionsBuilder<MetroDigitalDbContext>>? configure = null)
         {
             var optionsBuilder = new DbContextOptionsBuilder<MetroDigitalDbContext>();
             if (configure == null)
             {
-                var connectionStr = _configuration.GetSection("DBConnectionStrings:DefaultConnection").Value;
+                var connectionStr = configuration.GetSection("DBConnectionStrings:DefaultConnection").Value;
                 optionsBuilder.UseSqlServer(connectionStr).EnableSensitiveDataLogging();
             }
             else

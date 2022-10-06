@@ -26,5 +26,16 @@ namespace MetroDigital.Infrastructure
 
             return services;
         }
+
+        public static T MetroDigitalDBInitializer<T>(this T builder, IConfiguration configuration)
+        {
+            var context = MetroDigitalDbContextFactory.GetDbContext(configuration);
+            var payrollDbContextInitializer = new MetroDigitalDbContextInitializer(context);
+
+            payrollDbContextInitializer.EnsureInitialized();
+
+            return builder;
+
+        }
     }
 }
