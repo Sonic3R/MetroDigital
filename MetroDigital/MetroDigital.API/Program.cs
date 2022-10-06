@@ -1,3 +1,4 @@
+using MetroDigital.API;
 using MetroDigital.Application.Extensions;
 using MetroDigital.Infrastructure;
 
@@ -10,6 +11,7 @@ builder.Services.AddApplication().AddInfrastructure(builder.Configuration);
 builder.MetroDigitalDBInitializer(builder.Configuration);
 
 var app = builder.Build();
+app.SetupEndpoints();
 
 app.UseSwagger();
 app.UseSwaggerUI();
