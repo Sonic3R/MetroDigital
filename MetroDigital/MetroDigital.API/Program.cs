@@ -10,7 +10,7 @@ builder.Services.AddApplication().AddInfrastructure(builder.Configuration);
 
 builder.MetroDigitalDBInitializer(builder.Configuration);
 
-var app = builder.Build();
+var app = builder.Build();  
 app.SetupEndpoints();
 
 app.UseSwagger();
