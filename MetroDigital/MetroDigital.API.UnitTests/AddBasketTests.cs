@@ -1,4 +1,3 @@
-using MediatR;
 using MetroDigital.API.Models;
 using MetroDigital.Application.Features.Basket.Queries.AddBasket;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -8,7 +7,7 @@ using System.Net.Http.Json;
 
 namespace MetroDigital.API.UnitTests
 {
-    public class AddBasketTests
+    public class AddBasketTests : CommonTests
     {
         [Fact]
         public async Task AddBasketReturnsSuccess()
@@ -76,18 +75,6 @@ namespace MetroDigital.API.UnitTests
                 Assert.True(result.StatusCode == System.Net.HttpStatusCode.BadRequest);
                 VerifySender<AddBasketQueryResponse>(senderMock, Times.Once());
             }
-        }
-
-        private static Mock<ISender> CreateSender<TResponse>(TResponse outputData)
-        {
-            var senderMock = new Mock<ISender>();
-            senderMock.Setup(s => s.Send(It.IsAny<IRequest<TResponse>>(), It.IsAny<CancellationToken>())).ReturnsAsync(outputData);
-            return senderMock;
-        }
-
-        private static void VerifySender<TResponse>(Mock<ISender> senderMock, Times times)
-        {
-            senderMock.Verify(s => s.Send(It.IsAny<IRequest<TResponse>>(), It.IsAny<CancellationToken>()), times);
         }
 
         private static AddBasketQueryResponse GetAddBasketSuccessResponse()
