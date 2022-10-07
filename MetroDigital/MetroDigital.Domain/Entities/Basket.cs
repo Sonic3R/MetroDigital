@@ -4,6 +4,7 @@
     {
         public int BasketId { get; set; }
         public string Status { get; set; } = null!;
+        public bool PaysVAT { get; set; }
 
         public int UserId { get; set; }
         public User User { get; set; } = null!;

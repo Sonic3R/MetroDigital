@@ -1,4 +1,6 @@
-﻿using MetroDigital.API.Models;
+﻿using MediatR;
+using MetroDigital.API.Models;
+using MetroDigital.Application.Features.Basket.Commands.GetBasket;
 
 namespace MetroDigital.API
 {
@@ -16,9 +18,17 @@ namespace MetroDigital.API
                 var val = await request.ReadFromJsonAsync<ArticlePostRequest>(cancellationToken);
             });
 
-            app.MapGet("/baskets/{id}", async (int id, CancellationToken cancellationToken) =>
+            app.MapGet("/baskets/{id}", async (int id, ISender sender, CancellationToken cancellationToken) =>
             {
+                var command = new GetBasketCommand { BasketId = id };
+                var response = await sender.Send(command, cancellationToken);
 
+                if (!response.IsSuccess)
+                {
+                    return BasketGetResponseError.From(response);
+                }
+
+                return BasketGetResponse.From(response.Response);
             });
 
             app.MapPut("/baskets/{id}", async (HttpRequest request, int id, CancellationToken cancellationToken) =>
