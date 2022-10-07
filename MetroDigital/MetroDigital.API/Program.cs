@@ -35,3 +35,8 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
 app.Run();
+
+/// <summary>
+/// For UT purpose
+/// </summary>
+public partial class Program { }
