@@ -22,6 +22,7 @@ builder.Services.Configure<JsonOptions>(options =>
     options.SerializerOptions.WriteIndented = builder.Environment.IsDevelopment();
     options.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault | JsonIgnoreCondition.WhenWritingNull;
     options.SerializerOptions.NumberHandling = JsonNumberHandling.Strict;
+    options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
 builder.MetroDigitalDBInitializer(builder.Configuration);

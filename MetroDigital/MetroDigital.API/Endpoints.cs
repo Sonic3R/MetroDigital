@@ -3,8 +3,8 @@ using MetroDigital.API.Models;
 using MetroDigital.Application.Features.Basket.Commands.GetBasket;
 using MetroDigital.Application.Features.Basket.Queries.AddArticle;
 using MetroDigital.Application.Features.Basket.Queries.AddBasket;
+using MetroDigital.Application.Features.Basket.Queries.UpdateBasket;
 using System.Net;
-using System.Reflection;
 
 namespace MetroDigital.API
 {
@@ -19,7 +19,7 @@ namespace MetroDigital.API
                 var queryResponse = await sender.Send(query, cancellationToken);
 
                 return queryResponse.IsSuccess ?
-                            GetResultByStatus(HttpStatusCode.OK, queryResponse?.BasketItem?.BasketId) :
+                            GetResultByStatus(HttpStatusCode.OK, queryResponse?.BasketItem) :
                             GetResultByStatus(queryResponse.StatusCode, queryResponse);
             });
 
@@ -30,7 +30,7 @@ namespace MetroDigital.API
                 var queryResponse = await sender.Send(query, cancellationToken);
 
                 return queryResponse.IsSuccess ?
-                            GetResultByStatus(HttpStatusCode.OK, queryResponse?.ArticleItem?.ArticleId) :
+                            GetResultByStatus(HttpStatusCode.OK, queryResponse?.ArticleItem) :
                             GetResultByStatus(queryResponse.StatusCode, queryResponse);
             });
 
@@ -45,9 +45,15 @@ namespace MetroDigital.API
                 return GetResultByStatus(response.StatusCode, basketResponse);
             });
 
-            app.MapPut("/baskets/{id}", async (HttpRequest request, int id, CancellationToken cancellationToken) =>
+            app.MapPut("/baskets/{id}", async (HttpRequest request, int id, ISender sender, CancellationToken cancellationToken) =>
             {
                 var val = await request.ReadFromJsonAsync<UpdateBasketRequest>(cancellationToken);
+                var query = new UpdateBasketQuery { BasketId = id, Status = val.Status };
+                var queryResponse = await sender.Send(query, cancellationToken);
+
+                return queryResponse.IsSuccess ?
+                            GetResultByStatus(HttpStatusCode.OK, queryResponse?.BasketItem) :
+                            GetResultByStatus(queryResponse.StatusCode, queryResponse);
             });
         }
 
