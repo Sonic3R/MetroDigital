@@ -25,10 +25,10 @@ namespace MetroDigital.API
 
                 if (!response.IsSuccess)
                 {
-                    return BasketGetResponseError.From(response);
+                    return Results.NotFound(BasketGetResponseError.From(response));
                 }
 
-                return BasketGetResponse.From(response.Response);
+                return Results.Ok(BasketGetResponse.From(response.Response));
             });
 
             app.MapPut("/baskets/{id}", async (HttpRequest request, int id, CancellationToken cancellationToken) =>

@@ -37,16 +37,20 @@ namespace MetroDigital.API.Models
 
     public class BasketGetResponseError : BasketGetResponse
     {
-        public BasketGetResponseError(List<ValidationError> errors, int statusCode)
+        public BasketGetResponseError(List<ValidationError> errors, string errorMessage, int statusCode)
         {
             Errors = errors;
+            ErrorMessage = errorMessage;
+            StatusCode = statusCode;
         }
 
-        public List<ValidationError> Errors { get; }
+        public List<ValidationError>? Errors { get; }
+        public string ErrorMessage { get; }
+        public int StatusCode { get; }
 
         internal static BasketGetResponseError From(GetBasketCommandResponse response)
         {
-            return new BasketGetResponseError(response.ValidationsErrors, (int)response.StatusCode);
+            return new BasketGetResponseError(response.ValidationsErrors, response.ErrorMessage, (int)response.StatusCode);
         }
     }
 
