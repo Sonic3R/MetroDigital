@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
 namespace MetroDigital.API.UnitTests
@@ -15,6 +17,15 @@ namespace MetroDigital.API.UnitTests
         protected static void VerifySender<TResponse>(Mock<ISender> senderMock, Times times)
         {
             senderMock.Verify(s => s.Send(It.IsAny<IRequest<TResponse>>(), It.IsAny<CancellationToken>()), times);
+        }
+
+        protected static WebApplicationFactory<Program> GetApp(Mock<ISender> senderMock)
+        {
+            return new WebApplicationFactory<Program>()
+                .WithWebHostBuilder(builder => builder.ConfigureServices(services =>
+                {
+                    services.AddScoped((_) => senderMock.Object);
+                }));
         }
     }
 }

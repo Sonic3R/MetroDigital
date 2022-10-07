@@ -1,7 +1,5 @@
 using MetroDigital.API.Models;
 using MetroDigital.Application.Features.Basket.Queries.AddArticle;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using System.Net.Http.Json;
 
@@ -13,12 +11,7 @@ namespace MetroDigital.API.UnitTests
         public async Task AddArticleReturnsSuccess()
         {
             var senderMock = CreateSender(GetAddArticleSuccessResponse());
-
-            var app = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder => builder.ConfigureServices(services =>
-                {
-                    services.AddScoped((_) => senderMock.Object);
-                }));
+            var app = GetApp(senderMock);
 
             using (app)
             {
@@ -35,12 +28,7 @@ namespace MetroDigital.API.UnitTests
         public async Task AddArticleReturnsNotFound()
         {
             var senderMock = CreateSender(GetAddArticleNotFoundResponse());
-
-            var app = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder => builder.ConfigureServices(services =>
-                {
-                    services.AddScoped((_) => senderMock.Object);
-                }));
+            var app = GetApp(senderMock);
 
             using (app)
             {
@@ -58,12 +46,7 @@ namespace MetroDigital.API.UnitTests
         public async Task AddArticleReturnsBadRequest()
         {
             var senderMock = CreateSender(GetAddArticleBadRequestResponse());
-
-            var app = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder => builder.ConfigureServices(services =>
-                {
-                    services.AddScoped((_) => senderMock.Object);
-                }));
+            var app = GetApp(senderMock);
 
             using (app)
             {
@@ -81,12 +64,7 @@ namespace MetroDigital.API.UnitTests
         public async Task AddArticleReturnsBadRequestFromInvalidJsonInput()
         {
             var senderMock = CreateSender(GetAddArticleBadRequestResponse());
-
-            var app = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder => builder.ConfigureServices(services =>
-                {
-                    services.AddScoped((_) => senderMock.Object);
-                }));
+            var app = GetApp(senderMock);
 
             using (app)
             {

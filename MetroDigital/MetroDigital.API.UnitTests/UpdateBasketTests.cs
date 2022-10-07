@@ -1,8 +1,5 @@
 using MetroDigital.API.Models;
-using MetroDigital.Application.Features.Basket.Queries.AddBasket;
 using MetroDigital.Application.Features.Basket.Queries.UpdateBasket;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using System.Net.Http.Json;
 
@@ -14,12 +11,7 @@ namespace MetroDigital.API.UnitTests
         public async Task UpdateBasketReturnsSuccess()
         {
             var senderMock = CreateSender(GetUpdateBasketSuccessResponse());
-
-            var app = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder => builder.ConfigureServices(services =>
-                {
-                    services.AddScoped((_) => senderMock.Object);
-                }));
+            var app = GetApp(senderMock);
 
             using (app)
             {
@@ -36,12 +28,7 @@ namespace MetroDigital.API.UnitTests
         public async Task UpdateBasketReturnsNotFound()
         {
             var senderMock = CreateSender(GetUpdateBasketNotFoundResponse());
-
-            var app = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder => builder.ConfigureServices(services =>
-                {
-                    services.AddScoped((_) => senderMock.Object);
-                }));
+            var app = GetApp(senderMock);
 
             using (app)
             {
@@ -59,12 +46,7 @@ namespace MetroDigital.API.UnitTests
         public async Task UpdateBasketReturnsBadRequest()
         {
             var senderMock = CreateSender(GetUpdateBasketBadRequestResponse());
-
-            var app = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder => builder.ConfigureServices(services =>
-                {
-                    services.AddScoped((_) => senderMock.Object);
-                }));
+            var app = GetApp(senderMock);
 
             using (app)
             {
@@ -82,12 +64,7 @@ namespace MetroDigital.API.UnitTests
         public async Task AddBasketReturnsBadRequestFromInvalidJsonInput()
         {
             var senderMock = CreateSender(GetUpdateBasketBadRequestResponse());
-
-            var app = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder => builder.ConfigureServices(services =>
-                {
-                    services.AddScoped((_) => senderMock.Object);
-                }));
+            var app = GetApp(senderMock);
 
             using (app)
             {
