@@ -16,7 +16,11 @@ namespace MetroDigital.API
                 var query = new AddBasketQuery { UserName = val.Customer, PaysVAT = val.PaysVat };
                 var queryResponse = await sender.Send(query, cancellationToken);
 
-                return GetResultByStatus(queryResponse.StatusCode, queryResponse);
+                var result = queryResponse.IsSuccess ?
+                            GetResultByStatus(queryResponse.StatusCode, queryResponse?.BasketItem?.BasketId) :
+                            GetResultByStatus(queryResponse.StatusCode, queryResponse);
+
+                return result;
             });
 
             app.MapPost("/baskets/{id}/article-line", async (HttpRequest request, int id, CancellationToken cancellationToken) =>
