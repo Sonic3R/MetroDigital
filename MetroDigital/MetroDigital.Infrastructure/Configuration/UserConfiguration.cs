@@ -15,6 +15,10 @@ namespace MetroDigital.Infrastructure.Configuration
 
             builder.Property(x => x.Name).IsRequired();
             builder.HasIndex(x => x.Name).IsUnique();
+
+            builder.HasData(new User { UserId = 1, Name = "Andrei" });
+            builder.HasData(new User { UserId = 2, Name = "Mihail" });
+            builder.HasData(new User { UserId = 3, Name = "Test" });
         }
     }
 }

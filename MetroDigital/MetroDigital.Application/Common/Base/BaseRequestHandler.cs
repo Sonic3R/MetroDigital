@@ -41,6 +41,7 @@ namespace MetroDigital.Application.Common.Base
         {
             return _responseFactory.UnexpectedError<TResponse>(ex, logger);
         }
+
         protected TResponse NotFound(string errorMessage)
         {
             return _responseFactory.NotFound<TResponse>(errorMessage);

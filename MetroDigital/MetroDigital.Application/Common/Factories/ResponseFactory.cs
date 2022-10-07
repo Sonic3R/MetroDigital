@@ -27,21 +27,6 @@ namespace MetroDigital.Application.Common.Factories
             return r;
         }
 
-        public TResponse Unauthorized<TResponse>() where TResponse : Response
-        {
-            var r = CreateResponse<TResponse>(HttpStatusCode.Unauthorized);
-            r.IsSuccess = false;
-            return r;
-        }
-
-        public TResponse Unauthorized<TResponse>(string message) where TResponse : Response
-        {
-            var r = CreateResponse<TResponse>(HttpStatusCode.Unauthorized);
-            r.ErrorMessage = message;
-            r.IsSuccess = false;
-            return r;
-        }
-
         public TResponse UnexpectedError<TResponse>(Exception exception, ILogger logger) where TResponse : Response
         {
             var r = CreateResponse<TResponse>(HttpStatusCode.InternalServerError);

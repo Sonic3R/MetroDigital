@@ -25,7 +25,7 @@ namespace MetroDigital.API.Models
         public string? Customer { get; }
         public bool? PaysVat { get; }
 
-        internal static BasketGetResponse From(Basket basketEntity, double vat = 0.1)
+        internal static BasketGetResponse MapFrom(Basket basketEntity, double vat = 0.1)
         {
             var articles = basketEntity.Articles.Select(s => new ArticleGetResponse(s.Name, s.Price));
             var total = articles.Sum(article => article.Price);
@@ -48,7 +48,7 @@ namespace MetroDigital.API.Models
         public string ErrorMessage { get; }
         public int StatusCode { get; }
 
-        internal static BasketGetResponseError From(GetBasketCommandResponse response)
+        internal static BasketGetResponseError MapFrom(GetBasketCommandResponse response)
         {
             return new BasketGetResponseError(response.ValidationsErrors, response.ErrorMessage, (int)response.StatusCode);
         }
