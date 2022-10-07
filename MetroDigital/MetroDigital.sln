@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroDigital.API", "MetroDigital.API\MetroDigital.API.csproj", "{531DC643-B925-446A-8B84-B60EA58B828A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetroDigital.API", "MetroDigital.API\MetroDigital.API.csproj", "{531DC643-B925-446A-8B84-B60EA58B828A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroDigital.Application", "MetroDigital.Application\MetroDigital.Application.csproj", "{EE954DAC-3C6F-4F62-886D-FF0B942AC65D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetroDigital.Application", "MetroDigital.Application\MetroDigital.Application.csproj", "{EE954DAC-3C6F-4F62-886D-FF0B942AC65D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroDigital.Domain", "MetroDigital.Domain\MetroDigital.Domain.csproj", "{36248734-10C4-48E6-ABB8-1B87A978FCBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetroDigital.Domain", "MetroDigital.Domain\MetroDigital.Domain.csproj", "{36248734-10C4-48E6-ABB8-1B87A978FCBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroDigital.Infrastructure", "MetroDigital.Infrastructure\MetroDigital.Infrastructure.csproj", "{DD4DD268-DC98-4494-8BC2-5A22B7DEE71B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetroDigital.Infrastructure", "MetroDigital.Infrastructure\MetroDigital.Infrastructure.csproj", "{DD4DD268-DC98-4494-8BC2-5A22B7DEE71B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{1ADC74BC-4350-4FFE-B841-B2F266FF4E97}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D7E34BE6-35EE-40D7-8EDE-38DD1ADB79CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +40,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{531DC643-B925-446A-8B84-B60EA58B828A} = {1ADC74BC-4350-4FFE-B841-B2F266FF4E97}
+		{EE954DAC-3C6F-4F62-886D-FF0B942AC65D} = {1ADC74BC-4350-4FFE-B841-B2F266FF4E97}
+		{36248734-10C4-48E6-ABB8-1B87A978FCBC} = {1ADC74BC-4350-4FFE-B841-B2F266FF4E97}
+		{DD4DD268-DC98-4494-8BC2-5A22B7DEE71B} = {1ADC74BC-4350-4FFE-B841-B2F266FF4E97}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5ABF33CA-DED2-42A8-BF3F-86865A873803}
