@@ -3,6 +3,6 @@
 
     public sealed class UpdateBasketRequest
     {
-        public string Status { get; set; }
+        public string? Status { get; set; }
     }
 }
