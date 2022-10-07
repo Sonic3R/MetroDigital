@@ -19,7 +19,11 @@ namespace MetroDigital.Application.Features.Basket.Commands.GetBasket
         {
             using (var context = _metroDigitalDbContextFactory.Create())
             {
-                var basketItem = await context.Baskets.FirstOrDefaultAsync(x => x.BasketId == request.BasketId, cancellationToken);
+                var basketItem = await context.Baskets
+                                    .Include(c => c.User)
+                                    .Include(c => c.Articles)
+                                    .FirstOrDefaultAsync(x => x.BasketId == request.BasketId, cancellationToken);
+
                 if (basketItem == null)
                 {
                     return NotFound($"Basket item with ID: {request.BasketId} is not found.");

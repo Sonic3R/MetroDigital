@@ -15,11 +15,6 @@ namespace MetroDigital.Application.Common.Factories
             return r;
         }
 
-        public TResponse Success<TResponse>() where TResponse : Response
-        {
-            return CreateResponse<TResponse>(HttpStatusCode.OK);
-        }
-
         public TResponse Success<TResponse>(Action<TResponse> responseConfig) where TResponse : Response
         {
             var r = CreateResponse<TResponse>(HttpStatusCode.OK);
@@ -40,6 +35,19 @@ namespace MetroDigital.Application.Common.Factories
             return r;
         }
 
+        public TResponse UnexpectedError<TResponse>(string error, ILogger logger) where TResponse : Response
+        {
+            var r = CreateResponse<TResponse>(HttpStatusCode.InternalServerError);
+            r.IsSuccess = false;
+            var errorId = $"Error_{Guid.NewGuid():n}";
+            r.ErrorMessage = "An unexpected error has occured.\n" +
+                             "Please try again.\n\n" +
+                             $"If the problem persists contact support team.\nError ID: {errorId}";
+
+            logger?.LogError(error, $"{errorId}", errorId, Environment.StackTrace);
+            return r;
+        }
+
         public TResponse ValidationFailure<TResponse>(List<ValidationFailure> validationFailures) where TResponse : Response
         {
             var r = CreateResponse<TResponse>(HttpStatusCode.BadRequest);
@@ -49,27 +57,6 @@ namespace MetroDigital.Application.Common.Factories
                 PropertyName = x.PropertyName,
                 ErrorMessage = x.ErrorMessage
             }).ToList();
-            return r;
-        }
-
-        public TResponse ValidationFailure<TRequest, TResponse>(Action<ValidationErrorBuilder<TRequest, TResponse>> errors)
-            where TRequest : Request<TResponse>
-            where TResponse : Response, new()
-        {
-            var validationErrorFactory = new ValidationErrorBuilder<TRequest, TResponse>();
-            errors.Invoke(validationErrorFactory);
-
-            return ValidationFailure(validationErrorFactory);
-        }
-
-        public TResponse ValidationFailure<TRequest, TResponse>(ValidationErrorBuilder<TRequest, TResponse> errors)
-            where TRequest : Request<TResponse>
-            where TResponse : Response, new()
-        {
-            var validationErrors = errors.GetValidationFailures();
-            var r = CreateResponse<TResponse>(HttpStatusCode.BadRequest);
-            r.IsSuccess = false;
-            r.ValidationsErrors = validationErrors;
             return r;
         }
 

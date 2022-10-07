@@ -20,8 +20,4 @@
         <ProjectReference Include="..\MetroDigital.Domain\MetroDigital.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Features\Basket\Queries\" />
-    </ItemGroup>
-
 </Project>

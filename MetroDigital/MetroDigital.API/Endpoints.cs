@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MetroDigital.API.Models;
 using MetroDigital.Application.Features.Basket.Commands.GetBasket;
+using MetroDigital.Application.Features.Basket.Queries.AddBasket;
 using System.Net;
 
 namespace MetroDigital.API
@@ -9,9 +10,13 @@ namespace MetroDigital.API
     {
         public static void SetupEndpoints(this WebApplication app)
         {
-            app.MapPost("/baskets", async (HttpRequest request, CancellationToken cancellationToken) =>
+            app.MapPost("/baskets", async (HttpRequest request, ISender sender, CancellationToken cancellationToken) =>
             {
                 var val = await request.ReadFromJsonAsync<BasketPostRequest>(cancellationToken);
+                var query = new AddBasketQuery { UserName = val.Customer, PaysVAT = val.PaysVat };
+                var queryResponse = await sender.Send(query, cancellationToken);
+
+                return GetResultByStatus(queryResponse.StatusCode, queryResponse);
             });
 
             app.MapPost("/baskets/{id}/article-line", async (HttpRequest request, int id, CancellationToken cancellationToken) =>
@@ -43,6 +48,9 @@ namespace MetroDigital.API
                 case HttpStatusCode.BadRequest:
                 case HttpStatusCode.InternalServerError:
                     return Results.BadRequest(data);
+
+                case HttpStatusCode.NotFound:
+                    return Results.NotFound(data);
             }
 
             return Results.Ok(data);
