@@ -15,11 +15,6 @@ namespace MetroDigital.API
             app.MapPost("/baskets", async (HttpRequest request, ISender sender, CancellationToken cancellationToken) =>
             {
                 var val = await request.ReadFromJsonAsync<BasketPostRequest>(cancellationToken);
-                if (val is null)
-                {
-                    return Results.BadRequest();
-                }
-
                 var query = new AddBasketQuery { UserName = val.Customer, PaysVAT = val.PaysVat };
                 var queryResponse = await sender.Send(query, cancellationToken);
 
@@ -31,11 +26,6 @@ namespace MetroDigital.API
             app.MapPost("/baskets/{id}/article-line", async (HttpRequest request, int id, ISender sender, CancellationToken cancellationToken) =>
             {
                 var val = await request.ReadFromJsonAsync<ArticlePostRequest>(cancellationToken);
-                if (val is null)
-                {
-                    return Results.BadRequest();
-                }
-
                 var query = new AddArticleQuery { BasketId = id, ArticleName = val.Article, Price = val.Price };
                 var queryResponse = await sender.Send(query, cancellationToken);
 
@@ -58,11 +48,6 @@ namespace MetroDigital.API
             app.MapPut("/baskets/{id}", async (HttpRequest request, int id, ISender sender, CancellationToken cancellationToken) =>
             {
                 var val = await request.ReadFromJsonAsync<UpdateBasketRequest>(cancellationToken);
-                if (val is null)
-                {
-                    return Results.BadRequest();
-                }
-
                 var query = new UpdateBasketQuery { BasketId = id, Status = val.Status };
                 var queryResponse = await sender.Send(query, cancellationToken);
 

@@ -1,4 +1,5 @@
 using MetroDigital.API.Models;
+using MetroDigital.Application.Features.Basket.Queries.AddBasket;
 using MetroDigital.Application.Features.Basket.Queries.UpdateBasket;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
@@ -74,6 +75,29 @@ namespace MetroDigital.API.UnitTests
                 Assert.False(result.IsSuccessStatusCode);
                 Assert.True(result.StatusCode == System.Net.HttpStatusCode.BadRequest);
                 VerifySender<UpdateBasketQueryResponse>(senderMock, Times.Once());
+            }
+        }
+
+        [Fact]
+        public async Task AddBasketReturnsBadRequestFromInvalidJsonInput()
+        {
+            var senderMock = CreateSender(GetUpdateBasketBadRequestResponse());
+
+            var app = new WebApplicationFactory<Program>()
+                .WithWebHostBuilder(builder => builder.ConfigureServices(services =>
+                {
+                    services.AddScoped((_) => senderMock.Object);
+                }));
+
+            using (app)
+            {
+                var client = app.CreateClient();
+                var result = await client.PostAsync("/baskets", new FormUrlEncodedContent(new Dictionary<string, string> { { "invalid", "1" } }));
+
+                Assert.NotNull(result);
+                Assert.False(result.IsSuccessStatusCode);
+                Assert.True(result.StatusCode == System.Net.HttpStatusCode.BadRequest);
+                VerifySender<UpdateBasketQueryResponse>(senderMock, Times.Never());
             }
         }
 

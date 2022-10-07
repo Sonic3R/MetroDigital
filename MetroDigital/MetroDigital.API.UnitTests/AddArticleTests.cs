@@ -77,6 +77,29 @@ namespace MetroDigital.API.UnitTests
             }
         }
 
+        [Fact]
+        public async Task AddArticleReturnsBadRequestFromInvalidJsonInput()
+        {
+            var senderMock = CreateSender(GetAddArticleBadRequestResponse());
+
+            var app = new WebApplicationFactory<Program>()
+                .WithWebHostBuilder(builder => builder.ConfigureServices(services =>
+                {
+                    services.AddScoped((_) => senderMock.Object);
+                }));
+
+            using (app)
+            {
+                var client = app.CreateClient();
+                var result = await client.PostAsync("/baskets/1/article-line", new FormUrlEncodedContent(new Dictionary<string, string> { { "invalid", "1" } }));
+
+                Assert.NotNull(result);
+                Assert.False(result.IsSuccessStatusCode);
+                Assert.True(result.StatusCode == System.Net.HttpStatusCode.BadRequest);
+                VerifySender<AddArticleQueryResponse>(senderMock, Times.Never());
+            }
+        }
+
         private static AddArticleQueryResponse GetAddArticleSuccessResponse()
         {
             return new AddArticleQueryResponse

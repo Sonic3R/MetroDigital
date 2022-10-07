@@ -28,6 +28,15 @@ builder.Services.Configure<JsonOptions>(options =>
 builder.MetroDigitalDBInitializer(builder.Configuration);
 
 var app = builder.Build();
+app.UseExceptionHandler(exApp =>
+{
+    exApp.Run(async handler =>
+    {
+        handler.Response.StatusCode = StatusCodes.Status400BadRequest;
+        await handler.Response.WriteAsync("Bad Request.");
+    });
+});
+
 app.SetupEndpoints();
 
 app.UseSwagger();
