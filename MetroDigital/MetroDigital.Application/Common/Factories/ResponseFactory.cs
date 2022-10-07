@@ -11,7 +11,6 @@ namespace MetroDigital.Application.Common.Factories
         {
             var r = Activator.CreateInstance<TResponse>();
             r.StatusCode = statusCode;
-            r.IsSuccess = true;
             return r;
         }
 
@@ -25,7 +24,6 @@ namespace MetroDigital.Application.Common.Factories
         public TResponse UnexpectedError<TResponse>(Exception exception, ILogger logger) where TResponse : Response
         {
             var r = CreateResponse<TResponse>(HttpStatusCode.InternalServerError);
-            r.IsSuccess = false;
             var errorId = $"Error_{Guid.NewGuid():n}";
             r.ErrorMessage = "An unexpected error has occured.\n" +
                              "Please try again.\n\n" +
@@ -38,7 +36,6 @@ namespace MetroDigital.Application.Common.Factories
         public TResponse UnexpectedError<TResponse>(string error, ILogger logger) where TResponse : Response
         {
             var r = CreateResponse<TResponse>(HttpStatusCode.InternalServerError);
-            r.IsSuccess = false;
             var errorId = $"Error_{Guid.NewGuid():n}";
             r.ErrorMessage = "An unexpected error has occured.\n" +
                              "Please try again.\n\n" +
@@ -51,7 +48,6 @@ namespace MetroDigital.Application.Common.Factories
         public TResponse ValidationFailure<TResponse>(List<ValidationFailure> validationFailures) where TResponse : Response
         {
             var r = CreateResponse<TResponse>(HttpStatusCode.BadRequest);
-            r.IsSuccess = false;
             r.ValidationsErrors = validationFailures.Select(x => new ValidationError
             {
                 PropertyName = x.PropertyName,
@@ -63,7 +59,6 @@ namespace MetroDigital.Application.Common.Factories
         public TResponse NotFound<TResponse>(string errorMessage) where TResponse : Response
         {
             var r = CreateResponse<TResponse>(HttpStatusCode.NotFound);
-            r.IsSuccess = false;
             r.ErrorMessage = errorMessage;
             return r;
         }

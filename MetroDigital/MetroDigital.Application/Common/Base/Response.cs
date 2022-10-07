@@ -4,7 +4,7 @@ namespace MetroDigital.Application.Common.Base
 {
     public class Response
     {
-        public bool IsSuccess { get; set; }
+        public bool IsSuccess => StatusCode == HttpStatusCode.OK;
         public bool HasErrorMessage => !string.IsNullOrWhiteSpace(ErrorMessage);
         public string? ErrorMessage { get; set; }
         public HttpStatusCode StatusCode { get; set; }

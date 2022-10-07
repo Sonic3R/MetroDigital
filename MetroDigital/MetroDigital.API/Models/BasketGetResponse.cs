@@ -1,6 +1,7 @@
 ﻿using MetroDigital.Application.Common.Base;
 using MetroDigital.Application.Features.Basket.Commands.GetBasket;
 using MetroDigital.Domain.Entities;
+using System.Text.Json.Serialization;
 
 namespace MetroDigital.API.Models
 {
@@ -8,6 +9,7 @@ namespace MetroDigital.API.Models
     {
         public BasketGetResponse() { }
 
+        [JsonConstructor]
         public BasketGetResponse(int id, IEnumerable<ArticleGetResponse> articles, double totalNet, double totalGross, string customer, bool paysVat)
         {
             Id = id;
@@ -18,25 +20,26 @@ namespace MetroDigital.API.Models
             PaysVat = paysVat;
         }
 
-        public int? Id { get; }
-        public IEnumerable<ArticleGetResponse>? Articles { get; }
-        public double? TotalNet { get; }
-        public double? TotalGross { get; }
-        public string? Customer { get; }
-        public bool? PaysVat { get; }
+        public int Id { get; }
+        public IEnumerable<ArticleGetResponse> Articles { get; }
+        public double TotalNet { get; }
+        public double TotalGross { get; }
+        public string Customer { get; }
+        public bool PaysVat { get; }
 
         internal static BasketGetResponse MapFrom(Basket basketEntity, double vat = 0.1)
         {
-            var articles = basketEntity.Articles.Select(s => new ArticleGetResponse(s.Name, s.Price));
+            var articles = basketEntity.Articles?.Select(s => new ArticleGetResponse(s.Name, s.Price)) ?? Enumerable.Empty<ArticleGetResponse>();
             var total = articles.Sum(article => article.Price);
             var gross = total + (total * vat);
 
-            return new BasketGetResponse(basketEntity.BasketId, articles, total, gross, basketEntity.User.Name, basketEntity.PaysVAT);
+            return new BasketGetResponse(basketEntity.BasketId, articles, total, gross, basketEntity?.User?.Name ?? "", basketEntity?.PaysVAT ?? false);
         }
     }
 
     public class BasketGetResponseError : BasketGetResponse
     {
+        [JsonConstructor]
         public BasketGetResponseError(List<ValidationError> errors, string errorMessage, int statusCode)
         {
             Errors = errors;

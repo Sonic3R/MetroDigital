@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
@@ -25,6 +26,10 @@ namespace MetroDigital.API.UnitTests
                 .WithWebHostBuilder(builder => builder.ConfigureServices(services =>
                 {
                     services.AddScoped((_) => senderMock.Object);
+                    services.Configure<JsonOptions>(opts =>
+                    {
+                        opts.SerializerOptions.IncludeFields = true;
+                    });
                 }));
         }
     }
