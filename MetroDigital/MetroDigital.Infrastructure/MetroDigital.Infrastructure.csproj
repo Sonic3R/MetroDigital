@@ -22,4 +22,8 @@
       <ProjectReference Include="..\MetroDigital.Application\MetroDigital.Application.csproj" />
       <ProjectReference Include="..\MetroDigital.Domain\MetroDigital.Domain.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Migrations\" />
+    </ItemGroup>
 </Project>

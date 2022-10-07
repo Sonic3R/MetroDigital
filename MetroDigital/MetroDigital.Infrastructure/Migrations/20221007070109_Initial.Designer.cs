@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MetroDigital.Infrastructure.Migrations
 {
     [DbContext(typeof(MetroDigitalDbContext))]
-    [Migration("20221006131604_Initial")]
+    [Migration("20221007070109_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,6 +55,9 @@ namespace MetroDigital.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BasketId"), 1L, 1);
+
+                    b.Property<bool>("PaysVAT")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Status")
                         .IsRequired()

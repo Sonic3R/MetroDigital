@@ -54,6 +54,9 @@ namespace MetroDigital.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BasketId"), 1L, 1);
 
+                    b.Property<bool>("PaysVAT")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()

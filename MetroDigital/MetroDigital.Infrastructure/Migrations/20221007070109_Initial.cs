@@ -28,6 +28,7 @@ namespace MetroDigital.Infrastructure.Migrations
                     BasketId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "open"),
+                    PaysVAT = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
