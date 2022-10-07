@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using MetroDigital.API.Models;
 using MetroDigital.Application.Features.Basket.Commands.GetBasket;
+using MetroDigital.Application.Features.Basket.Queries.AddArticle;
 using MetroDigital.Application.Features.Basket.Queries.AddBasket;
 using System.Net;
+using System.Reflection;
 
 namespace MetroDigital.API
 {
@@ -16,16 +18,20 @@ namespace MetroDigital.API
                 var query = new AddBasketQuery { UserName = val.Customer, PaysVAT = val.PaysVat };
                 var queryResponse = await sender.Send(query, cancellationToken);
 
-                var result = queryResponse.IsSuccess ?
-                            GetResultByStatus(queryResponse.StatusCode, queryResponse?.BasketItem?.BasketId) :
+                return queryResponse.IsSuccess ?
+                            GetResultByStatus(HttpStatusCode.OK, queryResponse?.BasketItem?.BasketId) :
                             GetResultByStatus(queryResponse.StatusCode, queryResponse);
-
-                return result;
             });
 
-            app.MapPost("/baskets/{id}/article-line", async (HttpRequest request, int id, CancellationToken cancellationToken) =>
+            app.MapPost("/baskets/{id}/article-line", async (HttpRequest request, int id, ISender sender, CancellationToken cancellationToken) =>
             {
                 var val = await request.ReadFromJsonAsync<ArticlePostRequest>(cancellationToken);
+                var query = new AddArticleQuery { BasketId = id, ArticleName = val.Article, Price = val.Price };
+                var queryResponse = await sender.Send(query, cancellationToken);
+
+                return queryResponse.IsSuccess ?
+                            GetResultByStatus(HttpStatusCode.OK, queryResponse?.ArticleItem?.ArticleId) :
+                            GetResultByStatus(queryResponse.StatusCode, queryResponse);
             });
 
             app.MapGet("/baskets/{id}", async (int id, ISender sender, CancellationToken cancellationToken) =>
