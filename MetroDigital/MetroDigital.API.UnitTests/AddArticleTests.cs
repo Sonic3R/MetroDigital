@@ -82,7 +82,7 @@ namespace MetroDigital.API.UnitTests
         {
             return new AddArticleQueryResponse
             {
-                ArticleItem = new Domain.Entities.Article { ArticleId = 1 },
+                ArticleItem = new Application.Features.Basket.ArticleDto { Id = 1 },
                 StatusCode = System.Net.HttpStatusCode.OK
             };
         }
