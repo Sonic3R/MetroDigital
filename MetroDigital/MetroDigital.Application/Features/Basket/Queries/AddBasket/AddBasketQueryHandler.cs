@@ -57,7 +57,7 @@ namespace MetroDigital.Application.Features.Basket.Queries.AddBasket
                     return BadRequest(error);
                 }
 
-                return Success(response => response.BasketItem = basket);
+                return Success(response => response.BasketItem = BasketMapper.Map(basket));
             }
         }
     }

@@ -53,7 +53,7 @@ namespace MetroDigital.Application.Features.Basket.Queries.UpdateBasket
                     return BadRequest(error);
                 }
 
-                return Success(response => response.BasketItem = basketFound);
+                return Success(response => response.BasketItem = BasketMapper.Map(basketFound));
             }
         }
     }

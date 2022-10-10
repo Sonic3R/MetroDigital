@@ -58,7 +58,7 @@ namespace MetroDigital.Application.Features.Basket.Queries.AddArticle
                     return BadRequest(error);
                 }
 
-                return Success(response => response.ArticleItem = article);
+                return Success(response => response.ArticleItem = ArticleMapper.Map(article));
             }
         }
     }

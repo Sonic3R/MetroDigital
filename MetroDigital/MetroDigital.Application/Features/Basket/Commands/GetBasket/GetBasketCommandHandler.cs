@@ -29,7 +29,7 @@ namespace MetroDigital.Application.Features.Basket.Commands.GetBasket
                     return NotFound($"Basket item with ID: {request.BasketId} is not found.");
                 }
 
-                return Success(response => response.Response = basketItem);
+                return Success(response => response.Response = BasketMapper.Map(basketItem));
             }
         }
     }

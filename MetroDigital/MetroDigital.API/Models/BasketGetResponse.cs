@@ -1,6 +1,5 @@
 ﻿using MetroDigital.Application.Common.Base;
 using MetroDigital.Application.Features.Basket.Commands.GetBasket;
-using MetroDigital.Domain.Entities;
 using System.Text.Json.Serialization;
 
 namespace MetroDigital.API.Models
@@ -27,13 +26,13 @@ namespace MetroDigital.API.Models
         public string Customer { get; }
         public bool PaysVat { get; }
 
-        internal static BasketGetResponse MapFrom(Basket basketEntity, double vat = 0.1)
+        internal static BasketGetResponse MapFrom(Application.Features.Basket.BasketDto basketEntity, double vat = 0.1)
         {
             var articles = basketEntity.Articles?.Select(s => new ArticleGetResponse(s.Name, s.Price)) ?? Enumerable.Empty<ArticleGetResponse>();
             var total = articles.Sum(article => article.Price);
             var gross = total + (total * vat);
 
-            return new BasketGetResponse(basketEntity.BasketId, articles, total, gross, basketEntity?.User?.Name ?? "", basketEntity?.PaysVAT ?? false);
+            return new BasketGetResponse(basketEntity.Id, articles, total, gross, basketEntity?.Customer ?? "", basketEntity?.PaysVAT ?? false);
         }
     }
 

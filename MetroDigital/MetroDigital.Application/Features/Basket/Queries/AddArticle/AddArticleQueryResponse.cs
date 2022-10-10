@@ -5,6 +5,6 @@ namespace MetroDigital.Application.Features.Basket.Queries.AddArticle
 {
     public sealed class AddArticleQueryResponse : Response
     {
-        public Article? ArticleItem { get; set; }
+        public ArticleDto? ArticleItem { get; set; }
     }
 }
