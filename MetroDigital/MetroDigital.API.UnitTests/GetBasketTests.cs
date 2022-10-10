@@ -54,7 +54,7 @@ namespace MetroDigital.API.UnitTests
 
         private static GetBasketCommandResponse GetUpdateBasketSuccessResponse(int id)
         {
-            return new GetBasketCommandResponse { Response = new Domain.Entities.Basket { BasketId = id }, StatusCode = HttpStatusCode.OK };
+            return new GetBasketCommandResponse { Response = new Application.Features.Basket.BasketDto { Id = id }, StatusCode = HttpStatusCode.OK };
         }
 
         private static GetBasketCommandResponse GetUpdateBasketErrorResponse(int statusCode)
