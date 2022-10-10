@@ -21,7 +21,6 @@
     <ItemGroup>
         <ProjectReference Include="..\MetroDigital.Application\MetroDigital.Application.csproj" />
         <ProjectReference Include="..\MetroDigital.Domain\MetroDigital.Domain.csproj" />
-        <InternalsVisibleTo Include="..\MetroDigital.API.IntegrationTests\MetroDigital.API.IntegrationTests.csproj" />
     </ItemGroup>
 
     <ItemGroup>

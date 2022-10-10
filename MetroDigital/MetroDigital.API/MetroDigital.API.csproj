@@ -12,7 +12,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\MetroDigital.Infrastructure\MetroDigital.Infrastructure.csproj" />
-        <InternalsVisibleTo Include="..\MetroDigital.API.IntegrationTests\MetroDigital.API.IntegrationTests.csproj" />
     </ItemGroup>
 
 </Project>
