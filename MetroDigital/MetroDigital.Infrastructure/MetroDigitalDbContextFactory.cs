@@ -24,7 +24,7 @@ namespace MetroDigital.Infrastructure
             if (configure == null)
             {
                 var connectionStr = configuration.GetSection("DBConnectionStrings:DefaultConnection").Value;
-                optionsBuilder.UseSqlServer(connectionStr).EnableSensitiveDataLogging();
+                optionsBuilder.UseSqlServer(connectionStr);
             }
             else
             {
