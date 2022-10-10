@@ -1,4 +1,5 @@
 using MetroDigital.API.Models;
+using MetroDigital.Application.Features.Basket;
 using MetroDigital.Application.Features.Basket.Queries.UpdateBasket;
 using Moq;
 using System.Net.Http.Json;
@@ -82,7 +83,7 @@ namespace MetroDigital.API.UnitTests
         {
             return new UpdateBasketQueryResponse
             {
-                BasketItem = new Domain.Entities.Basket { BasketId = 1 },
+                BasketItem = new BasketDto { Id = 1 },
                 StatusCode = System.Net.HttpStatusCode.OK
             };
         }
