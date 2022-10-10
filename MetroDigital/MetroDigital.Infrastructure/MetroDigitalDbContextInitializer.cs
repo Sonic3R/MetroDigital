@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MetroDigital.Infrastructure
 {
-    internal class MetroDigitalDbContextInitializer : IMetroDigitalDbContextInitializer
+    internal sealed class MetroDigitalDbContextInitializer : IMetroDigitalDbContextInitializer
     {
         private readonly MetroDigitalDbContext _context;
 

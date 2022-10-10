@@ -18,7 +18,7 @@ namespace MetroDigital.API.IntegrationTests
                     Assert.NotNull(basketItem);
                     Assert.True(basketItem.Id == 1);
                     Assert.True(basketItem.Articles.Count() == 1);
-                    Assert.True(basketItem.Customer.Equals("Andrei"));
+                    Assert.True(basketItem.Customer.Equals("iannis"));
                     Assert.True(basketItem.PaysVat);
 
                     var article = basketItem.Articles.First();
